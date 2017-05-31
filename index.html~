@@ -1,0 +1,60 @@
+<html>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Amatica SC' rel='stylesheet'>
+<style>
+a:link{
+color:black;
+}
+a:visited{
+color:grey;
+}
+body {
+    font-family: 'Anaheim';font-size: 14px;
+}
+h1 {
+    font-family: 'Amatica SC';font-size: 44px;margin:0px;
+}
+
+h2 {
+    font-family: 'Amatica SC';font-size: 24px;margin-bottom:0px;
+}
+h1sub {
+    font-family: 'Anaheim';font-size: 12px;
+}
+h4 {
+    font-family: 'Anaheim';font-size: 14px; font-variant: small-caps; font-weight:550; margin-bottom:0px;
+}
+
+nav {
+    font-family: 'Amatica SC';font-size: 20px; font-weight:600;
+}
+
+</style>
+<title>Fatma Faruq</title>
+</head>
+<body>
+<header><h1>Fatma Faruq</h1><h1sub> fxf603 at cs dot bham dot ac dot uk </br>PhD Student (<a href="cs.bham.ac.uk">Department of Computer Science</a>, <a href="bham.ac.uk">University of Birmingham</a>)</h1sub>
+
+<hr>
+<nav><a href="#intro">About</a>|<a href="#projects">Projects</a>|<a href="#awards">Awards</a></nav></header><main>
+<section id="intro"><p>My advisers are<a href="http://www.cs.bham.ac.uk/~parkerdx/"> Dr. Dave Parker</a>, <a href="http://www.cs.bham.ac.uk/~nah/">Dr. Nick Hawes</a> and <a href="http://people.eng.unimelb.edu.au/tmiller/">Dr. Tim Miller (University of Melbourne)</a>.I also work with <a href="http://www.cs.bham.ac.uk/~lacerdab/">Dr. Bruno Lacerda</a>. I am supported by the Priestly Scholarship.</p><p>My research focus is on multi robot planning utilizing formal methods. I am also part of the <a href="https://www.cs.bham.ac.uk/research/groupings/robotics/">Intelligent Robotics Lab</a>. </p><p> I have an MSc. in Robotics from Carnegie Mellon University and a B.E in Computer Engineering from the National University of Science and Technology (NUST), Pakistan. After my masters I worked as a lecturer at NUST, teaching undergraduates introduction to programming. Before my masters I worked as a software developer at LMKR.</p> </section>
+
+<section id="projects"><h2>Projects</h2>
+<table>
+<!--<tr>
+<th style="width:80%"></th>
+<th style="widht:20%"></th>
+</tr>-->
+<tr>
+<td>
+<h4>When to Coordinate - Learning Sparse State Interactions in Multi Robot Policies</h4> For my masters' thesis I implemented a two layer Q-learning algorithm for Sparse Interaction MDPs and abstracted it to 3D space for the manipulation robot Baxter.(Here are videos of generated policies <a href="https://youtu.be/p9YSnN4lDnU" target="_blank">Video1</a>, <a href="https://youtu.be/8dhZOKPGXhg" target="_blank">Video2</a>)</td>
+<td><img src="img/bax.gif" alt="Policies in 3D for 2 robots" width="150" height="150" align="right"></td>
+</tr>
+<tr>
+<td><h4>Robot Safety</h4> During my masters I also implementing a provably safe version of the the Dynamic Window Approach for obstacle avoidance using ROS.(Here are videos of a very basic setup on a robot <a href="https://www.dropbox.com/s/h2zbbh5naey2nx4/collision_avoidance_1.mpg?dl=0" target="_blank">Video1</a>,<a href="https://www.dropbox.com/s/wcftb3phi9sg3o7/collision_avoidance_2.mpg?dl=0" target="_blank">Video2)</a></td><td><img src="img/dwa_s.gif" width="150" height="100" align="right"></td></tr>
+<tr><td> <h4>Playing Tetris</h4> Implemented a policy improvement algorithm that learned to play tetris.</td><td></td></tr><tr><td> <h4>Gesture Recognition using MEMS</h4>For my undergrad final year project, my groupmate and I implemented a proof of concept for gesture recognition using wireless sensor network and Hidden Markov Models.(<a href="https://www.dropbox.com/s/40uldztp7d081ka/FatmaFaruq_ActivityRecognition.pdf?dl=0" target="_blank">Link to our project presentation</a>)</td><td><img src ="img/act.png" width="150" height="100" align="right"></td></tr><!-- <h4>Robot Simulator</h4>For our computer graphics course in my undergrad, my teammates and I implemented a robot simulator using OpenGL and C++ which allowed the user to build a crude robot chassis in 3-D, place sensoros, input a line track and see how the robot did--></table></section>
+<section id="awards"><h2>Awards</h2>Priestly Scholarship Recipient</br>Fulbright Scholar</br>Winning Team Code for Pakistan Islamabad Civic Hackathon 2016 </section>
+<hr>
+<section id="misc"><h2>Misc</h2>During my bachelors, my team and I designed and fabricated an autonomous robot that could line track and place pegs in stands for a national competition.For the Systems Engineering course in my masters, I was part of a team that made an exhibit which was deployed in the Pittsburgh Children's Museum for 3 days where kids could race dummy robot cars. <p> I'm also interested in teaching kids robotics and was part of CMU-Scitech where we taught middle schoolers arduino and scratch programming. As a lecturer at NUST, I organized and conducted workshops on Lego Robot Programming for school children and was also part of the Theme Committee for the National Engineering Robotics Contest.</p></section> </main>
+</body>
+</html>
