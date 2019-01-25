@@ -1,0 +1,3 @@
+[submodule "web-speech-api"]
+	path = web-speech-api
+	url = https://github.com/fatmaf/web-speech-api

@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  background: #020202;
+  cursor: crosshair;
+}
+canvas{display:block}
+#bdaytext {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  
+  color: #fff;
+  font-family: "Source Sans Pro";
+  font-size: 7em;
+  text-align: center;
+  font-weight: 900;
+  -webkit-user-select: none;
+  user-select: none;
+}
