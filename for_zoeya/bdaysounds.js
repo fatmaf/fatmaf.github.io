@@ -122,6 +122,21 @@ function speak_text_last(inputtext,elemid,alltext){
 	
   
 }
+
+function create_text_elem(a,idnum){
+    var node = document.createElement("span");
+    var id = "text"+a+idnum;
+    node.setAttribute("id",id);
+    var textnode = document.createTextNode(a);
+    if(a!=' '){
+	node.addEventListener('click', function(){
+	    
+	speak_text(a,id);
+    });}
+    
+    node.appendChild(textnode); 
+    document.getElementById("bdaytext").appendChild(node);
+}
 function anotherFunction(a,idnum,islast,text){
     var node = document.createElement("span");
     var id = "text"+a+idnum;
@@ -148,15 +163,29 @@ var node = document.createElement("H2");
     node.appendChild(textnode); 
     document.body.append(node);
 }
-function display_text(text){
+function addImage(img_url,id,tosay) {
+    var x = document.createElement("IMG");
+    x.setAttribute("id",id);
+  x.setAttribute("src", img_url);
+  //x.setAttribute("width", "304");
+  x.setAttribute("height", "100em");
+    x.setAttribute("alt", " ");
+    x.addEventListener('click',function(){
+	just_speak(tosay); });
+	
+  document.getElementById("bdaytext").appendChild(x);
+}
+function display_text(text,img_url,tosay){
     strcount++;
     for(var i=0; i<text.length; i++){
 	var isLast = (i==(text.length-1));
 
-	anotherFunction(text[i]+" ",strcount+""+i,isLast,text);
+	create_text_elem(text[i]+" ",strcount+""+i);
     
     //}
     }
+    if (img_url !=""){
+	addImage(img_url,strcount+""+text.length,tosay);}
     var node = document.createElement("BR");
     document.getElementById("bdaytext").appendChild(node);
 
@@ -174,16 +203,18 @@ function display_text_say(text,say){
     document.getElementById("bdaytext").appendChild(node);
 
 }
-
+var hpsay = "img/sky.jpg";//"https://drive.google.com/uc?export=view&id=1qZfFj7LjKU4ilYYhpSW0zLvlS4A_p_BV";
+var zoe= "img/z.jpg";//"https://drive.google.com/uc?export=view&id=17ANGLkM-uz1acpSBohV3YYZHkF-A3VQU";//https://drive.google.com/open?id=17ANGLkM-uz1acpSBohV3YYZHkF-A3VQU
+var me="img/m.jpg";//"https://drive.google.com/uc?export=view&id=1PZXUmj15-Fz_MW3-eu4mM8x5cYRwCgQ0";//https://drive.google.com/open?id=1PZXUmj15-Fz_MW3-eu4mM8x5cYRwCgQ0//https://drive.google.com/open?id=17ANGLkM-uz1acpSBohV3YYZHkF-A3VQU
 var text_to_say = 'birth day';
 var text_to_display='HAPPY'; 
 var text_to_display2='BIRTHDAY';
 var text_to_display3= 'ZOEYA';
-display_text(text_to_display);
-display_text_say(text_to_display2,text_to_say);
-display_text_say(text_to_display3,"zo ya");
-display_text('LOVE,');
-display_text_say('PHUPPO',"pooh po");
+display_text(text_to_display,"","happy!");
+display_text(text_to_display2,hpsay,"happy birth day!!");
+display_text(text_to_display3,zoe,"zo ya");
+display_text('LOVE,',"","");
+display_text('PHUPPO',me,"love, pooh po");
 //speak_text('Hi');
 /*inputForm.onsubmit = function(event) {
   event.preventDefault();
