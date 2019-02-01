@@ -108,7 +108,7 @@ function just_speak(inputtext)
 }
 
     function speak_text(inputtext,elemid){
-	just_speak(inputtext);
+	just_speak(inputtext.toLowerCase());
  	document.getElementById(elemid).setAttribute("style","color:red");
 	
   
