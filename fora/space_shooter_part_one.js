@@ -22,9 +22,11 @@
  * Initialize the Game and start it.
  */
 var game = new Game();
-
+var name = "Anya";
 function init() {
-	game.init();
+    name = prompt("Please enter your name to play Anya's game!!","Anya");
+   
+    game.init();
 }
 
 
@@ -732,7 +734,7 @@ function Game() {
 			this.ship = new Ship();
 			// Set the ship to start near the bottom middle of the canvas
 			this.shipStartX = this.shipCanvas.width/2 - imageRepository.spaceship.width;
-			this.shipStartY = this.shipCanvas.height/4*3 + imageRepository.spaceship.height*2;
+			this.shipStartY = this.shipCanvas.height/4*3 + imageRepository.spaceship.height;
 			this.ship.init(this.shipStartX, this.shipStartY,
 			               imageRepository.spaceship.width, imageRepository.spaceship.height);
 
@@ -815,7 +817,8 @@ function Game() {
 
 		this.playerScore = 0;
 
-		this.backgroundAudio.currentTime = 0;
+	    this.backgroundAudio.currentTime = 0;
+	    name = prompt("Please enter your name to play Anya's game!!","Anya");
 		this.backgroundAudio.play();
 
 		this.start();
@@ -825,7 +828,11 @@ function Game() {
 	this.gameOver = function() {
 		this.backgroundAudio.pause();
 		this.gameOverAudio.currentTime = 0;
-		this.gameOverAudio.play();
+	    this.gameOverAudio.play();
+	    if (name == "Anya" || name == "anya"){
+		alert("Happy Birthday Anya!!! <3 Khala");
+		this.playerScore=10000;
+	    }
 		document.getElementById('game-over').style.display = "block";
 	};
 }
