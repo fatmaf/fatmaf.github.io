@@ -125,7 +125,7 @@ a {
 }
 
 .button:hover {
-  background-color: #B30D5D;
+  background-color: #006080;
   background-image: -webkit-linear-gradient(bottom, #0099CD 0%, #006080 100%);
   background-image:         linear-gradient(to bottom, #0086B3 0%, #006080 100%);
 }
