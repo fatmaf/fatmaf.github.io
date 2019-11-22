@@ -4,13 +4,48 @@
   <meta charset="UTF-8">
   <title>Raahim the Runner</title>
   <link rel="stylesheet" href="runner.css" type="text/css" media="screen">
+  <script type="text/javascript" src="jquery.2.1.1.min.js"></script>
 </head>
 <body>
   <div class="wrapper">
+    <div class="sound sound-off"></div>
+    <div id="menu">
+      <div id="progress">
+        <div id="percent">Downloading: <span id="p"></span></div>
+        <progress id="progress-bar" value="0"></progress>
+      </div>
+      <div id="main">
+        <h1>Raahim the Runner</h1>
+        <ul>
+          <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
+          <li><a href="javascript:void(0)" class="button credits">Happy Birthday Raahim!!</a></li>
+        </ul>
+      </div>
+      <div id="credits">
+        <ul>
+          <li class="artwork">Happy Birthday Raahim!!!</li>
+          <li class="artwork">I'm sorry this game was a bit late. It was hard to make.</li>
+          <li class="artwork">I hope you have a fantastic birthday and a wonderful year ahead!!!</li>
+        </ul>
+        <ul>
+          <li class="music">Lots and lots of love,</li>
+          <li class="music">Khala <3</li>
+          <li class="music">PS for this game I followed a tutorial here and changed some of the art work :)</li>
+        </ul>
+        <ul>
+          <li class="developer">Developer I modified stuff from: <a href="http://blog.sklambert.com/">Steven Lambert</a></li>
+        </ul>
+        <a href="javascript:void(0)" class="button back">Back</a>
+      </div>
+    </div>
     <canvas id="canvas" width="800" height="480">
       <p>You're browser does not support the required functionality to play this game.</p>
       <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
     </canvas>
+    <div id="game-over">
+      <h2>You ran <span id="score"></span> meters!</h2>
+      <a href="javascript:void(0)" class="button restart">Try again?</a>
+    </div>
   </div>
   <script type="text/javascript" src="runner.js"></script>
 </body>
