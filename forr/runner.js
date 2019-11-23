@@ -142,7 +142,8 @@ var playSound;
  /**
    * Create assets, set callback for asset loading, set asset source
    */
-  this.downloadAll = function() {
+      this.downloadAll = function() {
+	  hide(sprites);
     var _this = this;
     var src;
 
