@@ -60,7 +60,9 @@ a {
 #menu.credits {
   background-image: url('imgs/credits-bg.png');
 }
-
+#menu.sprites{
+    background-image:url('imgs/menu-bg.png');
+}
 #progress {
   height: 12%;
   margin: auto;
@@ -110,7 +112,7 @@ a {
 
 .button {
   display: block;
-  width: 150px;
+  width: 100px;
   margin: 0 auto;
   height: 30px;
   line-height: 30px;
@@ -123,7 +125,23 @@ a {
   background-image:         linear-gradient(to bottom, #009A9A 0%, #008080 100%);
   border-radius: 5px;
 }
-
+.spriteRahim{
+    background-image:url('imgs/rthumb.png');
+    height:96px;
+    
+}
+.spriteFam{
+    background-image:url('imgs/fthumb.png');
+    height:96px;
+    width:104px;
+    
+}
+.spritePerson{
+    background-image:url('imgs/boy.png');
+    height:96px;
+    width:105px;
+    
+}
 .button:hover {
   background-color: #006080;
   background-image: -webkit-linear-gradient(bottom, #0099CD 0%, #006080 100%);

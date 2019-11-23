@@ -7,12 +7,55 @@
 </head>
 <body>
   <div class="wrapper">
+   <!--     <div class="sound sound-off"></div>  -->
+    <div id="menu"> 
+   <!--  <div id="progress">
+        <div id="percent">Downloading: <span id="p"></span></div>
+        <progress id="progress-bar" value="0"></progress>
+      </div> -->
+     <div id="main">
+        <h1>Raahim the Runner</h1> 
+        <ul>
+          <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
+          <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+        </ul>
+     </div>
+     <div id="sprites">
+       <h2>Choose your Sprite</h2>
+       
+	  <a href="javascript:void(0)" class="button spriteRahim">Raahim</a> 
+	 <a href="javascript:void(0)" class="button spritePerson">Person</a>
+	   <a href="javascript:void(0)" class="button spriteFam">Family</a>
+	 
+       </div>
+     <div id="credits">
+        <ul> 
+          <li class="artwork">Character design and art: <a href="http://www.acrylicana.com/">Mary Winkler</a></li>
+          <li class="artwork">Walk cycle animation: <a href="http://vimeo.com/hellostudios">Adam Everett Miller</a></li>
+          <li class="artwork">Platformer tiles: <a href="http://www.kenney.nl/">Kenney</a></li>
+        </ul>
+        <ul>
+          <li class="music">Game music: <a href="http://opengameart.org/content/jump-and-run-8-bit">bart</a></li>
+          <li class="music">Jump sound effect: <a href="http://opengameart.org/content/platformer-jumping-sounds">dklon</a></li>
+          <li class="music">Game over music: <a href="http://opengameart.org/content/lose-music-3">remaxim</a></li>
+        </ul>
+        <ul>
+          <li class="developer">Developer: <a href="http://blog.sklambert.com/">Steven Lambert</a></li>
+        </ul>
+        <a href="javascript:void(0)" class="button back">Back</a>
+      </div> 
+    </div> 
+
     <canvas id="canvas" width="800" height="480">
       <p>You're browser does not support the required functionality to play this game.</p>
       <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
     </canvas>
         <div id="game-over">
-      <a href="javascript:void(0);" class="restart" id="restart">Try again?</a>
+	    <h2>You ran <span id="score"></span> meters!</h2>
+	  
+     <!-- <a href="javascript:void(0);" class="restart" id="restart">Try again?</a>-->
+      <a href="javascript:void(0)" class="button restart">Try again?</a>
+
     </div>
   </div>
   <script type="text/javascript" src="runner.js"></script>

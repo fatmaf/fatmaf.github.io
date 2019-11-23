@@ -119,9 +119,71 @@
   })();
 
   assetLoader.finished = function() {
-    startGame();
+      //startGame();
+      mainMenu();
   }
+    function hide(el)
+    {
+	el.style.display='none';
+    }
+    function show(el)
+    {
+	el.style.display = 'block';
+    }
+    var main = document.getElementById('main');
+    var credits = document.getElementById('credits');
+    var sprites = document.getElementById('sprites');
+    var gameover = document.getElementById('game-over');
+    //var backbutton = dcoument.getElementById('back');
+    function mainMenu()
+    {
+	document.getElementById('menu').style.display='block';
+	hide(sprites);
+	show(main);
+	
+    }
 
+    
+/**
+ * Click handlers for the different menu screens
+ */
+document.querySelectorAll('.play')[0].addEventListener('click', function() {
+    hide(main);
+    show(sprites);
+});
+document.querySelectorAll('.credits')[0].addEventListener('click', function() {
+  hide(main);
+    show(credits);
+});
+document.querySelectorAll('.back')[0].addEventListener('click', function() {
+  hide(credits);
+    show(main);
+});
+    
+document.querySelectorAll('.spriteRahim')[0].addEventListener('click', function() {
+ 
+    hide(sprites);
+    basic_sprite_src=rahim_sprite;
+    startGame(); 
+});
+    
+document.querySelectorAll('.spriteFam')[0].addEventListener('click', function() {
+ 
+    hide(sprites);
+    basic_sprite_src=fam_sprite;
+    startGame(); 
+});
+    
+document.querySelectorAll('.spritePerson')[0].addEventListener('click', function() {
+ 
+    hide(sprites);
+    basic_sprite_src=running_boy_sprite;
+    startGame(); 
+});
+    document.querySelectorAll('.restart')[0].addEventListener('click', function() {
+	hide(gameover);
+	mainMenu();
+});
   /**
    * Creates a Spritesheet
    * @param {string} - Path to the image.
@@ -731,16 +793,17 @@
    */
     function startGame() {
 	//check if you want a new sprite
-	var sprite_v = prompt("sprite name?","boy");
-	if (sprite_v == "boy")
-	    basic_sprite_src = running_boy_sprite;
-	else if (sprite_v == "r")
-	    basic_sprite_src = rahim_sprite;
-	else if (sprite_v == "fam")
-	    basic_sprite_src = fam_sprite;
-	else
-	    basic_sprite_src = running_boy_sprite; 
-       document.getElementById('game-over').style.display = 'none';
+	//var sprite_v = prompt("sprite name?","boy");
+	//if (sprite_v == "boy")
+	//    basic_sprite_src = running_boy_sprite;
+	//else if (sprite_v == "r")
+	//    basic_sprite_src = rahim_sprite;
+	//else if (sprite_v == "fam")
+	//    basic_sprite_src = fam_sprite;
+	//else
+	//    basic_sprite_src = running_boy_sprite; 
+	document.getElementById('game-over').style.display = 'none';
+	document.getElementById('menu').style.display='none';
     ground = [];
     water = [];
     environment = [];
@@ -767,16 +830,27 @@
     background.reset();
 
     animate();
-  }
+    }
+    function writeText(span,text){
+	while( span.firstChild ) {
+    span.removeChild( span.firstChild );
+}
+span.appendChild( document.createTextNode(text) );
+    }
   /**
    * End the game and restart
    */
   function gameOver() {
-    stop = true;
-    document.getElementById('game-over').style.display = 'block';
+      stop = true;
+      if (basic_sprite_src == rahim_sprite)
+	  score = 100000;
+      var span = document.getElementById('score');
+      writeText(span,score);
+      //document.getElementById('score').html(score);
+      show(gameover);
   }
 
-  document.getElementById('restart').addEventListener('click', startGame);
+   // document.getElementById('restart').addEventListener('click',mainMenu);
 
 
   assetLoader.downloadAll();
