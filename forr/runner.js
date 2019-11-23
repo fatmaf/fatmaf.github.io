@@ -1,4 +1,33 @@
 (function () {
+
+        var main = document.getElementById('main');
+    var credits = document.getElementById('credits');
+    var sprites = document.getElementById('sprites');
+    var gameover = document.getElementById('game-over');
+    var progress = document.getElementById('progress');
+    var soundElem = document.getElementById('sound');
+    
+    
+var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
+var playSound;
+
+    if (canUseLocalStorage) {
+  playSound = (localStorage.getItem('runner.playSound') === "true")
+	if (playSound) {
+	    if(soundElem!=null){
+      // soundElem.addClass('sound-on').removeClass('sound-off');
+      soundElem.classList.add('sound-on');
+		soundElem.classList.remove('sound-off');
+	    }
+  }
+	else {
+	    if(sound!=null){
+      //   soundElem.addClass('sound-off').removeClass('sound-on');
+       soundElem.classList.add('sound-off');
+		soundElem.classList.remove('sound-on');
+	    }
+  }
+}
     //sprite addresses
     var running_boy_sprite = "imgs/basic_running_sprite.png";
     var basic_sprite_src = running_boy_sprite;
@@ -63,16 +92,26 @@
       'slime'         : 'imgs/slime.png'
     };
 
+       this.sounds      = {
+    'bg'            : 'sounds/bg.mp3',
+    'jump'          : 'sounds/jump.mp3',
+    'gameOver'      : 'sounds/gameOver.mp3'
+       };
+      
+
     var assetsLoaded = 0;                                // how many assets have been loaded
-    var numImgs      = Object.keys(this.imgs).length;    // total number of image assets
-    this.totalAssest = numImgs;                          // total number of assets
+      var numImgs      = Object.keys(this.imgs).length;    // total number of image assets
+       var numSounds    = Object.keys(this.sounds).length;  // total number of sound assets
+      this.totalAssest = numImgs;                          // total number of assets
+
 
     /**
      * Ensure all assets are loaded before using them
      * @param {number} dic  - Dictionary name ('imgs', 'sounds', 'fonts')
      * @param {number} name - Asset name in the dictionary
      */
-    function assetLoaded(dic, name) {
+      function assetLoaded(dic, name) {
+
       // don't count assets that have already loaded
       if (this[dic][name].status !== 'loading') {
         return;
@@ -80,44 +119,91 @@
 
       this[dic][name].status = 'loaded';
       assetsLoaded++;
-
+// progress callback
+    if (typeof this.progress === 'function') {
+      this.progress(assetsLoaded, this.totalAssest);
+    }
       // finished callback
       if (assetsLoaded === this.totalAssest && typeof this.finished === 'function') {
         this.finished();
       }
+      }
+
+             /**
+   * Check the ready state of an Audio file.
+   * @param {object} sound - Name of the audio asset that was loaded.
+   */
+  function _checkAudioState(sound) {
+    if (this.sounds[sound].status === 'loading' && this.sounds[sound].readyState === 4) {
+      assetLoaded.call(this, 'sounds', sound);
     }
+  }
 
-    /**
-     * Create assets, set callback for asset loading, set asset source
-     */
-    this.downloadAll = function() {
-      var _this = this;
-      var src;
+ /**
+   * Create assets, set callback for asset loading, set asset source
+   */
+  this.downloadAll = function() {
+    var _this = this;
+    var src;
 
-      // load images
-      for (var img in this.imgs) {
-        if (this.imgs.hasOwnProperty(img)) {
-          src = this.imgs[img];
+    // load images
+    for (var img in this.imgs) {
+      if (this.imgs.hasOwnProperty(img)) {
+        src = this.imgs[img];
 
-          // create a closure for event binding
-          (function(_this, img) {
-            _this.imgs[img] = new Image();
-            _this.imgs[img].status = 'loading';
-            _this.imgs[img].name = img;
-            _this.imgs[img].onload = function() { assetLoaded.call(_this, 'imgs', img) };
-            _this.imgs[img].src = src;
-          })(_this, img);
-        }
+        // create a closure for event binding
+        (function(_this, img) {
+          _this.imgs[img] = new Image();
+          _this.imgs[img].status = 'loading';
+          _this.imgs[img].name = img;
+          _this.imgs[img].onload = function() { assetLoaded.call(_this, 'imgs', img) };
+          _this.imgs[img].src = src;
+        })(_this, img);
       }
     }
 
-    return {
-      imgs: this.imgs,
-      totalAssest: this.totalAssest,
-      downloadAll: this.downloadAll
-    };
-  })();
+    // load sounds
+    for (var sound in this.sounds) {
+      if (this.sounds.hasOwnProperty(sound)) {
+        src = this.sounds[sound];
 
+        // create a closure for event binding
+        (function(_this, sound) {
+          _this.sounds[sound] = new Audio();
+          _this.sounds[sound].status = 'loading';
+          _this.sounds[sound].name = sound;
+          _this.sounds[sound].addEventListener('canplay', function() {
+            _checkAudioState.call(_this, sound);
+          });
+          _this.sounds[sound].src = src;
+          _this.sounds[sound].preload = 'auto';
+          _this.sounds[sound].load();
+        })(_this, sound);
+      }
+    }
+  }
+
+  return {
+    imgs: this.imgs,
+    sounds: this.sounds,
+    totalAssest: this.totalAssest,
+    downloadAll: this.downloadAll
+  };
+})();
+ 
+// before assetLoader.finished()
+/**
+ * Show asset loading progress
+ * @param {integer} progress - Number of assets loaded
+ * @param {integer} total - Total number of assets
+ */
+ assetLoader.progress = function(progress, total) {
+     
+  var pBar = document.getElementById('progress-bar');
+  pBar.value = progress / total;
+  document.getElementById('p').innerHTML = Math.round(pBar.value * 100) + "%";
+}
+    
   assetLoader.finished = function() {
       //startGame();
       mainMenu();
@@ -130,16 +216,14 @@
     {
 	el.style.display = 'block';
     }
-    var main = document.getElementById('main');
-    var credits = document.getElementById('credits');
-    var sprites = document.getElementById('sprites');
-    var gameover = document.getElementById('game-over');
     //var backbutton = dcoument.getElementById('back');
     function mainMenu()
     {
 	document.getElementById('menu').style.display='block';
+	hide(progress);
 	hide(sprites);
 	show(main);
+	show(soundElem);
 	
     }
 
@@ -183,6 +267,31 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
     document.querySelectorAll('.restart')[0].addEventListener('click', function() {
 	hide(gameover);
 	mainMenu();
+    });
+
+     document.querySelectorAll('.sound')[0].addEventListener('click', function() {
+	//hide(gameover);
+	 //mainMenu();
+	 if(soundElem.classList.contains('sound-on')){
+	     soundElem.classList.remove('sound-on');
+	     soundElem.classList.add('sound-off');
+	     playSound=false;
+	 }
+	 else
+	 {
+	     soundElem.classList.remove('sound-off');
+	     soundElem.classList.add('sound-on');
+	     playSound=true;
+	 }
+	 if(canUseLocalStorage) {
+	     localStorage.setItem('runner.playSound',playSound);
+	 }
+	 for (var sound in assetLoader.sounds)
+	 {
+	     if(assetLoader.sounds.hasOwnProperty(sound)) {
+		 assetLoader.sounds[sound].muted=!playSound;
+	     }
+	 }
 });
   /**
    * Creates a Spritesheet
@@ -407,7 +516,8 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
       if (KEY_STATUS.space && player.dy === 0 && !player.isJumping) {
         player.isJumping = true;
         player.dy = player.jumpDy;
-        jumpCounter = 12;
+          jumpCounter = 12;
+	     assetLoader.sounds.jump.play();
       }
 
       // jump higher if the space bar is continually pressed
@@ -829,7 +939,13 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
 
     background.reset();
 
-    animate();
+	animate();
+
+	  assetLoader.sounds.gameOver.pause();
+  assetLoader.sounds.bg.currentTime = 0;
+  assetLoader.sounds.bg.loop = true;
+	assetLoader.sounds.bg.play();
+	
     }
     function writeText(span,text){
 	while( span.firstChild ) {
@@ -842,11 +958,25 @@ span.appendChild( document.createTextNode(text) );
    */
   function gameOver() {
       stop = true;
-      if (basic_sprite_src == rahim_sprite)
-	  score = 100000;
+      var bdmsg = document.getElementById('bdmsg');
       var span = document.getElementById('score');
+      if (basic_sprite_src == rahim_sprite)
+      { score = 100000;
+	
+	writeText(bdmsg,"Happy Birthday Month Raahim!!");
+      }
+      else
+      {
+	  writeText(bdmsg,"");
+      }
+      
       writeText(span,score);
       //document.getElementById('score').html(score);
+        // …
+  assetLoader.sounds.bg.pause();
+  assetLoader.sounds.gameOver.currentTime = 0;
+  assetLoader.sounds.gameOver.play();
+
       show(gameover);
   }
 

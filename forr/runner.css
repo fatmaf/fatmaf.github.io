@@ -84,10 +84,12 @@ a {
 .sound-on {
   background-image: url('imgs/soundOn.png');
   background-repeat: no-repeat;
+ 
 }
 .sound-off {
   background-image: url('imgs/soundOff.png');
   background-repeat: no-repeat;
+ 
 }
 
 #main {
