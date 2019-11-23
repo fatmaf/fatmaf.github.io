@@ -778,29 +778,29 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
         environment.push(new Sprite(
           canvas.width + platformWidth % player.speed,
           platformBase - platformHeight * platformSpacer - platformWidth,
-            (Math.random() > 0.5 ? 'ironman':'plant')
+            'plant'
         ));
       }
       else if (platformLength > 2) {
         environment.push(new Sprite(
           canvas.width + platformWidth % player.speed,
           platformBase - platformHeight * platformSpacer - platformWidth,
-            (Math.random()>0.5? 'apa':'bush1')
+             'bush1'
         ));
         environment.push(new Sprite(
           canvas.width + platformWidth % player.speed + platformWidth,
           platformBase - platformHeight * platformSpacer - platformWidth,
-            (Math.random()>0.5?'us':'bush2')
+            'bush2'
         ));
       }
     }
       else
       {
-	  if(platformHeight > 4){
-	  if(Math.random() > 0.7){
+	  if(platformHeight > 2){
+	  if(Math.random() > 0.5){
 	  environment.push(new Sprite(
           canvas.width + platformWidth % player.speed,
-          platformBase - platformHeight * platformSpacer - platformWidth,
+          platformBase - platformHeight * platformSpacer - platformWidth+100,
               (Math.random()>0.33? (Math.random()>0.5?'apa':'us'):'ironman')
           ));
 	  }}
@@ -811,13 +811,13 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
    * Spawn new enemy sprites off screen
    */
   function spawnEnemySprites() {
-    if (score > 100 && Math.random() > 0.96 && enemies.length < 3 && platformLength > 5 &&
+    if (score > 100 && Math.random() > 0.96 && enemies.length < 3 && platformLength > 10 &&
         (enemies.length ? canvas.width - enemies[enemies.length-1].x >= platformWidth * 3 ||
          canvas.width - enemies[enemies.length-1].x < platformWidth : true)) {
       enemies.push(new Sprite(
         canvas.width + platformWidth % player.speed,
         platformBase - platformHeight * platformSpacer - platformWidth,
-          Math.random() > 0.25 ? (Math.random()>0.5 ? 'spikes' :'thanos') : 'slime'
+          Math.random() > 0.25 ? (Math.random()>0.3 ? 'spikes' :'thanos') : 'slime'
       ));
     }
   }
