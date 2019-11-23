@@ -1,6 +1,10 @@
 (function () {
     //sprite addresses
-    var basic_sprite_src = "imgs/basic_running_sprite.png";
+    var running_boy_sprite = "imgs/basic_running_sprite.png";
+    var basic_sprite_src = running_boy_sprite;
+    var rahim_sprite = "imgs/rahim_running_sprite.png";
+    var fam_sprite = "imgs/bikesprite.png";
+    
   // define variables
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
@@ -318,13 +322,16 @@
     player.isFalling = false;
     player.isJumping = false;
 
+     player.resetSprite = function(){
     // spritesheets
     player.sheet     = new SpriteSheet(basic_sprite_src, player.width, player.height);
     player.walkAnim  = new Animation(player.sheet, 4, 0, 15);
     player.jumpAnim  = new Animation(player.sheet, 4, 15, 15);
     player.fallAnim  = new Animation(player.sheet, 4, 11, 11);
     player.anim      = player.walkAnim;
+      };
 
+      player.resetSprite();
     Vector.call(player, 0, 0, 0, player.dy);
 
     var jumpCounter = 0;  // how long the jump button can be pressed down
@@ -380,7 +387,8 @@
     /**
      * Reset the player's position
      */
-    player.reset = function() {
+      player.reset = function() {
+	  player.resetSprite();
       player.x = 64;
       player.y = 250;
     };
@@ -721,7 +729,17 @@
   /**
    * Start the game - reset all variables and entities, spawn platforms and water.
    */
-  function startGame() {
+    function startGame() {
+	//check if you want a new sprite
+	var sprite_v = prompt("sprite name?","boy");
+	if (sprite_v == "boy")
+	    basic_sprite_src = running_boy_sprite;
+	else if (sprite_v == "r")
+	    basic_sprite_src = rahim_sprite;
+	else if (sprite_v == "fam")
+	    basic_sprite_src = fam_sprite;
+	else
+	    basic_sprite_src = running_boy_sprite; 
        document.getElementById('game-over').style.display = 'none';
     ground = [];
     water = [];
