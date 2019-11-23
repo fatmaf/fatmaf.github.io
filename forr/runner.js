@@ -89,7 +89,11 @@ var playSound;
       'cliff'         : 'imgs/grassCliffRight.png',
       'spikes'        : 'imgs/spikes.png',
       'box'           : 'imgs/boxCoin.png',
-      'slime'         : 'imgs/slime.png'
+	'slime'         : 'imgs/slime.png',
+	'thanos' : 'imgs/thanos.png',
+	'ironman':'imgs/ironman.png',
+	'apa':'imgs/apa.jpg',
+	'us':'imgs/us.jpg'
     };
 
        this.sounds      = {
@@ -774,22 +778,33 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
         environment.push(new Sprite(
           canvas.width + platformWidth % player.speed,
           platformBase - platformHeight * platformSpacer - platformWidth,
-          'plant'
+            (Math.random() > 0.5 ? 'ironman':'plant')
         ));
       }
       else if (platformLength > 2) {
         environment.push(new Sprite(
           canvas.width + platformWidth % player.speed,
           platformBase - platformHeight * platformSpacer - platformWidth,
-          'bush1'
+            (Math.random()>0.5? 'apa':'bush1')
         ));
         environment.push(new Sprite(
           canvas.width + platformWidth % player.speed + platformWidth,
           platformBase - platformHeight * platformSpacer - platformWidth,
-          'bush2'
+            (Math.random()>0.5?'us':'bush2')
         ));
       }
     }
+      else
+      {
+	  if(platformHeight > 4){
+	  if(Math.random() > 0.7){
+	  environment.push(new Sprite(
+          canvas.width + platformWidth % player.speed,
+          platformBase - platformHeight * platformSpacer - platformWidth,
+              (Math.random()>0.33? (Math.random()>0.5?'apa':'us'):'ironman')
+          ));
+	  }}
+      }
   }
 
   /**
@@ -802,7 +817,7 @@ document.querySelectorAll('.spritePerson')[0].addEventListener('click', function
       enemies.push(new Sprite(
         canvas.width + platformWidth % player.speed,
         platformBase - platformHeight * platformSpacer - platformWidth,
-        Math.random() > 0.5 ? 'spikes' : 'slime'
+          Math.random() > 0.25 ? (Math.random()>0.5 ? 'spikes' :'thanos') : 'slime'
       ));
     }
   }
