@@ -53,16 +53,9 @@ a {
   z-index: 2;
   text-align: center;
   background-color: grey;
+   background-image: url('imgs/menu-bg.png');
 }
-#menu.main {
-  background-image: url('imgs/menu-bg.png');
-}
-#menu.credits {
-  background-image: url('imgs/credits-bg.png');
-}
-#menu.sprites{
-    background-image:url('imgs/menu-bg.png');
-}
+
 #progress {
   height: 12%;
   margin: auto;
