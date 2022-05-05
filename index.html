@@ -1,6 +1,6 @@
 <html>
 <head>
-<link href='https://fonts.googleapis.com/css?family=Amatica SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 <style>
 body{
 max-width: 750px;
@@ -13,27 +13,27 @@ a:visited{
 color:grey;
 }
 table {
-    font-family: 'Anaheim';font-size: 14px;
+    font-family: 'Roboto';font-size: 14px;
 }
 body {
-    font-family: 'Anaheim';font-size: 14px;
+    font-family: 'Roboto';font-size: 14px;
 }
 h1 {
-    font-family: 'Amatica SC';font-size: 44px;margin:0px;
+    font-family: 'Roboto';font-size: 44px;margin:0px;
 }
 
 h2 {
-    font-family: 'Amatica SC';font-size: 24px;margin-bottom:0px;
+    font-family: 'Roboto';font-size: 20px;margin-bottom:0px;
 }
 h1sub {
-    font-family: 'Anaheim';font-size: 12px;
+    font-family: 'Roboto';font-size: 12px;
 }
 h4 {
-    font-family: 'Anaheim';font-size: 14px; font-variant: small-caps; font-weight:550; margin-bottom:0px;
+    font-family: 'Roboto';font-size: 14px; font-variant: small-caps; font-weight:600; margin-bottom:0px;
 }
 
 nav {
-    font-family: 'Amatica SC';font-size: 20px; font-weight:600;
+    font-family: 'Roboto';font-size: 10px; font-weight:600;
 }
 
 </style>
@@ -47,37 +47,46 @@ nav {
         Fatma Faruq
     </h1>
     <h1sub> 
-        fatma dot faruq at manchester dot ac dot uk 
+        fatma.faruq@manchester.ac.uk 
     </br>
-    Postdoctoral Research Assistant (
+    Postdoctoral Research Associate (
     <a href="https://www.cs.manchester.ac.uk">Department of Computer Science</a>,
     <a href="http://manchester.ac.uk/">University of Manchester</a>)
     </h1sub>
 
 <hr>
 <nav>
+    |
     <a href="#intro">About</a>
     |
-    <a href="#projects">Projects</a>
+    <a href="#education">Experience</a>
     |
-   <!-- <a href="#awards">Awards</a>-->
-    </nav>
+    <a href="#projects">Research/Projects</a>
+    |
+    <a href="https://dblp.org/pid/138/8086"> dblp Publications Link</a>
+    |
+        <!-- <a href="#awards">Awards</a>-->
+</nav>
+<hr>
     </header>
     <main>
-<section id="intro">
-    <p><b>Update:</b> I'm working as a PDRA at the University of Manchester in the <a href="https://autonomy-and-verification.github.io/">Autonomy and Verification Group</a>.
-    I work with <a href="https://personalpages.manchester.ac.uk/staff/michael.fisher/">Michael Fisher</a>, <a href="https://personalpages.manchester.ac.uk/staff/louise.dennis/">Louise Dennis</a> and <a href="https://personalpages.manchester.ac.uk/staff/clare.dixon/">Clare Dixon</a>.
+        <section id="intro">
+            <h2>About me</h2>
+            <p> I am a Postdoctoral Research Associate at the University of Manchester in the <a href="https://autonomy-and-verification.github.io/">Autonomy and Verification Group</a>.
+                I work with <a href="https://personalpages.manchester.ac.uk/staff/michael.fisher/">Michael Fisher</a>, <a href="https://personalpages.manchester.ac.uk/staff/louise.dennis/">Louise Dennis</a> and <a href="https://personalpages.manchester.ac.uk/staff/clare.dixon/">Clare Dixon</a>. My current focus is runtime verification of robots. I am also involved with the Trustworthy Autonomonous Systems Hub's <a href="https://verifiability.org"> Verifiability Node</a>.
     </p>
-    <p><b>Update:</b> I've defended my PhD thesis titled "Verified multi-robot planning under uncertainty" </p>
-    <p>My advisers are
+    <section id="education">
+        <h2> Experience </h2>
+    <p>I have been awarded a PhD jointly by the University of Birmingham and University of Melbourne.
+        My PhD studies were supported by the Priestly Scholarship which is a joint degree program between the two universities.
+        My PhD thesis was titled <i>Verified multi-robot planning under uncertainty</i>. My wonderful advisers were
         <a href="http://www.cs.bham.ac.uk/~parkerdx/"> Dr. Dave Parker</a>,
         <a href="http://www.cs.bham.ac.uk/~nah/">Dr. Nick Hawes</a> and 
         <a href="http://people.eng.unimelb.edu.au/tmiller/">Dr. Tim Miller (University of Melbourne)</a> and 
         <a href="http://www.cs.bham.ac.uk/~lacerdab/">Dr. Bruno Lacerda</a>. 
-        I am supported by the Priestly Scholarship.
-    </p>
-    <p>My research focus is on multi robot planning utilizing formal methods. 
-        I am also part of the <a href="https://www.cs.bham.ac.uk/research/groupings/robotics/">Intelligent Robotics Lab</a>. 
+       
+   My research focus was multi robot planning utilizing formal methods. 
+        I was also part of the <a href="https://www.cs.bham.ac.uk/research/groupings/robotics/">Intelligent Robotics Lab</a>. 
     </p>
     <p> I have an MSc. in Robotics from Carnegie Mellon University where I was part of the 
         <a href="http://www.cs.cmu.edu/~coral/">CORAL lab</a> under 
@@ -88,12 +97,20 @@ nav {
         Before my masters I worked as a software developer at
         <a href="http://www.lmkr.com/">LMKR</a> which is an oil and gas software compnany.</p> </section>
 
-<section id="projects"><h2>Projects</h2>
+<section id="projects"><h2>Research/Projects</h2>
 <table>
 <!--<tr>
 <th style="width:80%"></th>
 <th style="widht:20%"></th>
-</tr>-->
+     </tr>-->
+
+    <tr>
+        <td>
+            <h4>Verified multi-robot planning under uncertainty</h4> My PhD work investigated task allocation and planning robust to robot failure with a quantitative guarantee on the expected number of tasks completed by the team. I looked at three different algorithms for task allocation and planning, incorporating task reallocation when a robot failed.</td>
+        <td><img src="img/STAPU_animation.gif" alt="Simultaneous task allocation and planning under uncertainty" width="150" height="100" align="right"></td>
+    </tr>
+    <tr>
+
 <tr>
 <td>
 <h4>When to Coordinate - Learning Sparse State Interactions in Multi Robot Policies</h4> For my masters' thesis I implemented a two layer Q-learning algorithm for Sparse Interaction MDPs and abstracted it to 3D space for the manipulation robot Baxter.(Here are videos of generated policies <a href="https://youtu.be/p9YSnN4lDnU" target="_blank">Video1</a>, <a href="https://youtu.be/8dhZOKPGXhg" target="_blank">Video2</a>)</td>
