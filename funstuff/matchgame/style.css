@@ -13,23 +13,49 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 5%;
-    padding: 5%;
+    margin: 2%;
+    padding: 2%;
     justify-items: center;
 }
 main{
     flex-direction: row;
-}
-#gamebox, #gamebox_clone{
-    display: grid;
-    height: 500px;
-    width: 500px;
-    margin: 1%;
 
 }
+@media only screen and (min-width: 100px)
+{
+    #gamebox, #gamebox_clone{
+        display: grid;
+        height: 100px;
+        width: 100px;
+        margin: 1%;
+
+    }
+}
+@media only screen and (min-width: 480px)
+{
+    #gamebox, #gamebox_clone{
+        display: grid;
+        height: 400px;
+        width: 400px;
+        margin: 1%;
+
+    }
+}
+@media only screen and (min-width: 600px) , (min-width:786px){
+    #gamebox, #gamebox_clone{
+        display: grid;
+        height: 500px;
+        width: 500px;
+        margin: 1%;
+
+    }
+}
+
 .dbox{
     border: 1px solid black;
     font-size: 4pt;
+    min-width: 10px;
+    min-height: 10px;
     /*align-items: center;*/
     /*justify-items: center;*/
 
