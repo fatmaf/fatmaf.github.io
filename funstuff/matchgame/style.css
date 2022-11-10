@@ -4,6 +4,8 @@ body{
     --color3: #59544bff;
     --color4: #7d8ca3ff;
     --color5: #79a9d1ff;
+    width: 100%;
+    height: 100%;
 }
 .basicflex{
     display: flex;
@@ -12,14 +14,25 @@ body{
     justify-content: center;
     flex-direction: column;
     margin: 5%;
+    padding: 5%;
+    justify-items: center;
 }
-#gamebox{
+main{
+    flex-direction: row;
+}
+#gamebox, #gamebox_clone{
     display: grid;
     height: 500px;
     width: 500px;
+    margin: 1%;
+
 }
 .dbox{
     border: 1px solid black;
+    font-size: 4pt;
+    /*align-items: center;*/
+    /*justify-items: center;*/
+
 }
 /*.grid {*/
 /*    height: 560px;*/

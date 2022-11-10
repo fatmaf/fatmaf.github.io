@@ -1,6 +1,6 @@
 const num_cols_max = 8;
 
-const possibleColors=[
+const possibleColors = [
     // getComputedStyle(document.body).getPropertyValue('--color1'),
     // getComputedStyle(document.body).getPropertyValue('--color2'),
     getComputedStyle(document.body).getPropertyValue('--color3'),
@@ -9,53 +9,50 @@ const possibleColors=[
 ];
 const noboxColor = 'white';
 let squares = [];
-function get_square_row(square_id)
-{
-    return Math.floor(square_id/num_cols_max);
-}
-function get_square_col(square_id)
-{
-    return square_id%num_cols_max;
-}
-function get_square_id(square_row,square_col)
-{
 
-    let toret= square_row*num_cols_max+ square_col;
-    console.info("[",square_row,",",square_col,"]",toret);
+function get_square_row(square_id) {
+    return Math.floor(square_id / num_cols_max);
+}
+
+function get_square_col(square_id) {
+    return square_id % num_cols_max;
+}
+
+function get_square_id(square_row, square_col) {
+
+    let toret = square_row * num_cols_max + square_col;
+    console.info("[", square_row, ",", square_col, "]", toret);
     return toret;
 }
-function get_row_col(square_id)
-{
-    return [get_square_row(square_id),get_square_col(square_id)];
+
+function get_row_col(square_id) {
+    return [get_square_row(square_id), get_square_col(square_id)];
 }
-function get_4_connected_neighbours(square_id)
-{
+
+function get_4_connected_neighbours(square_id) {
     let square_row = get_square_row(square_id);
     let square_col = get_square_col(square_id);
 
-    console.log("square",square_id,": ",square_row,square_col," computed ",get_square_id(square_row,square_col));
+    console.log("square", square_id, ": ", square_row, square_col, " computed ", get_square_id(square_row, square_col));
     let neighbours = [
-            square_id+num_cols_max,
-                        square_id-num_cols_max,
-                            square_id+1,
-                            square_id-1];
-    console.log("unfiltered neighbours ",square_id, neighbours);
+        square_id + num_cols_max,
+        square_id - num_cols_max,
+        square_id + 1,
+        square_id - 1];
+    console.log("unfiltered neighbours ", square_id, neighbours);
     let filtered_neighbours = [];
     //so say we have a square n, then the one above it will be n - max width
     //the one below it will be n + max width
     //the one next to it will be n-1, n+1
 
     // now we filter stuff
-    for(let i = 0; i<neighbours.length; i++)
-    {
-        if ((neighbours[i] < num_cols_max*num_cols_max ) && (neighbours[i] >=0))
-        {
+    for (let i = 0; i < neighbours.length; i++) {
+        if ((neighbours[i] < num_cols_max * num_cols_max) && (neighbours[i] >= 0)) {
             //now to check if there's no row and column change
             let neighbour_row = get_square_row(neighbours[i]);
             let neighbour_col = get_square_col(neighbours[i]);
-            console.log("neighbour ",neighbours[i],": ",neighbour_row,neighbour_col);
-            if(neighbour_row == square_row || neighbour_col == square_col)
-            {
+            console.log("neighbour ", neighbours[i], ": ", neighbour_row, neighbour_col);
+            if (neighbour_row == square_row || neighbour_col == square_col) {
                 filtered_neighbours.push(neighbours[i]);
             }
         }
@@ -64,31 +61,29 @@ function get_4_connected_neighbours(square_id)
 
 
 }
-function find_all_4_connected_squares_with_color(squares,square_id){
+
+function find_all_4_connected_squares_with_color(squares, square_id) {
     //so basically start with the id that we have
     // do its neighbours
     // and then do that ones neighbours
     let color_to_match = squares[square_id].style.backgroundColor;
-    console.log("Matching ",color_to_match);
+    console.log("Matching ", color_to_match);
     let ns = get_4_connected_neighbours(square_id);
-    console.log("4 connected neighbours ",ns);
+    console.log("4 connected neighbours ", ns);
     let visited = []
     let tovisit = ns;
-    let all_ns={};
+    let all_ns = {};
     // so for each of these add these to the list if the color matches
-    while(tovisit.length != 0)
-    {
+    while (tovisit.length != 0) {
         let visiting = tovisit.pop();
-        if(!visited.includes(visiting))
-        {
+        if (!visited.includes(visiting)) {
 
             visited.push(visiting);
-            if(squares[visiting].style.backgroundColor == color_to_match)
-            {
+            if (squares[visiting].style.backgroundColor == color_to_match) {
 
                 let row_col = get_row_col(visiting);
-                if (!(row_col[1] in all_ns)){
-                    all_ns[row_col[1]]=[];
+                if (!(row_col[1] in all_ns)) {
+                    all_ns[row_col[1]] = [];
                 }
                 all_ns[row_col[1]].push(row_col[0]);
 
@@ -105,93 +100,108 @@ function find_all_4_connected_squares_with_color(squares,square_id){
     //     }
     //     return a[1] - b[1];
     // });
-    for (let key in all_ns)
-    {
-        all_ns[key].sort((a,b)=> a-b);
+    for (let key in all_ns) {
+        all_ns[key].sort((a, b) => a - b);
     }
     console.log(all_ns);
     return all_ns;
 }
-function update_squares(affected_squares,squares)
-{
+
+function update_squares(affected_squares, squares) {
     //affected squares
     //format is a dictionary with columns as keys and rows as list elements
     // for each col we set all the ones in the list to white
 
-    for (let colval in affected_squares)
-    {
+    for (let colval in affected_squares) {
 
-        for(let rowindex in affected_squares[colval])
-        {
+
+        for (let rowindex in affected_squares[colval]) {
 
             let rowval = affected_squares[colval][rowindex];
             let squareid = get_square_id(parseInt(rowval), parseInt(colval));
-           let square= squares[squareid];
-           square.style.backgroundColor=noboxColor;
+            let square = squares[squareid];
+            square.style.backgroundColor = noboxColor;
+            // square.style.borderColor = "yellow";
         }
-        let collen = affected_squares[colval].length;
-        // now we can just change things
-        // best to just do it in multiple goes
-        // we start with the lowest in the list
-        // and go all the way to 0
-        for(let i = 0; i<collen; i++) {
-            for (let lowestaffect = affected_squares[colval][collen - 1]; lowestaffect >= 0; lowestaffect--) {
-                let squareid = get_square_id(lowestaffect, parseInt(colval));
-                if (lowestaffect == 0) {
-                    squares[squareid].style.backgroundColor =noboxColor;
-                } else {
-                    let squareabove = get_square_id(lowestaffect - 1, parseInt(colval));
-                    // set the color of squareid to the square above
-                    squares[squareid].style.backgroundColor = squares[squareabove].style.backgroundColor;
-                }
-            }
-        }
+
+        recolor_column(affected_squares[colval],parseInt(colval),squares);
+
+
     }
-
-
 }
+function recolor_column(affected_row_vals,column_val,squares){
+    let start_at = affected_row_vals[affected_row_vals.length-1];
+    let end_at = start_at;
+    let start_square = get_square_id(start_at,column_val);
+    let next_square = start_square;
+    do {
+        while (squares[next_square].style.backgroundColor == noboxColor) {
+            if (end_at - 1 >= 0) {
+                end_at--;
+                next_square = next_square - num_cols_max;
+            } else {
+                break;
+            }
+
+        }
+        do {
+             if (end_at == -1) {
+                squares[start_square].style.backgroundColor = noboxColor;
+            } else {
+                squares[start_square].style.backgroundColor = squares[next_square].style.backgroundColor;
+            }
+            // if ((start_square - num_cols_max) >= 0) {
+                start_square = start_square - num_cols_max;
+            // }
+            if (end_at-1 >= -1) {
+                next_square = next_square - num_cols_max;
+                end_at--;
+            }
+        } while (!affected_row_vals.includes(end_at) && (start_square >=0));
+    }while(start_square>=0);
+}
+
 function dblclick_grid_square(event) {
     // console.log(event);
     // console.log(event.target);
     let squareid = parseInt(event.target.getAttribute("id"));
-    console.log(squareid," dlb clicked");
+    console.log(squareid, " dlb clicked");
     // event.target.style.backgroundColor = noboxColor;
-    let all_connected_ns = find_all_4_connected_squares_with_color(squares,squareid);
+    let all_connected_ns = find_all_4_connected_squares_with_color(squares, squareid);
     //format is a dictionary with columns as keys and rows as list elements
-    update_squares(all_connected_ns,squares);
+    update_squares(all_connected_ns, squares);
 }
 
-function click_grid_square(event)
-{
+function click_grid_square(event) {
     let squareid = parseInt(event.target.getAttribute("id"));
-    console.log(squareid," clicked");
-    find_all_4_connected_squares_with_color(squares,squareid);
+    console.log(squareid, " clicked");
+    find_all_4_connected_squares_with_color(squares, squareid);
 }
-function hover_square(event)
-{
+
+function hover_square(event) {
     let squareid = parseInt(event.target.getAttribute("id"));
     let square_row = get_square_row(squareid);
     let square_col = get_square_col(squareid);
 
-    console.log("square",squareid,": ",square_row,square_col," computed ",get_square_id(square_row,square_col));
-    console.log(squareid," hovered");
+    console.log("square", squareid, ": ", square_row, square_col, " computed ", get_square_id(square_row, square_col));
+    console.log(squareid, " hovered");
 }
-function create_grid_squares(parent_elem)
-{
+
+function create_grid_squares(parent_elem) {
     let squares = []
-    for(let i = 0; i<num_cols_max*num_cols_max; i++)
-    {
+    for (let i = 0; i < num_cols_max * num_cols_max; i++) {
         const square = document.createElement("div");
         square.classList.add("dbox");
         // let colornum = i%possibleColors.length;
         let colornum = Math.floor(Math.random() * possibleColors.length);
         square.style.backgroundColor = possibleColors[colornum];
-        square.setAttribute('id',i);
-        square.addEventListener('dblclick',dblclick_grid_square);
+        // square.innerText = "(" + i + ":" + colornum + ")";
+
+        square.setAttribute('id', i);
+        square.addEventListener('dblclick', dblclick_grid_square);
         // square.addEventListener('click',click_grid_square);
         // square.addEventListener('mouseover',hover_square);
-        if(parent_elem!= null)
-        {
+        if (parent_elem != null) {
             parent_elem.appendChild(square);
         }
         squares.push(square);
@@ -200,20 +210,42 @@ function create_grid_squares(parent_elem)
     return squares;
 }
 
+function clone_gamebox(parent_elem, squares_to_clone) {
+    for (let i = 0; i < squares_to_clone.length; i++) {
+        const square = document.createElement("div");
+        square.classList.add("dbox");
+
+        square.style.backgroundColor = squares_to_clone[i].style.backgroundColor;
+        square.innerText = squares_to_clone[i].innerText;
+
+        square.setAttribute('id', "cbox" + i);
+        // square.addEventListener('dblclick',dblclick_grid_square);
+        // square.addEventListener('click',click_grid_square);
+        // square.addEventListener('mouseover',hover_square);
+        if (parent_elem != null) {
+            parent_elem.appendChild(square);
+        }
+
+    }
+}
 
 function load_game(event) {
-console.log(event);
-console.log(event.target);
+    console.log(event);
+    console.log(event.target);
 // lets popuplate the gamebox div
     const gamebox = document.getElementById("gamebox");
     squares = create_grid_squares(gamebox);
-    gamebox.style.gridTemplateColumns = "repeat("+num_cols_max+",1fr)";
-    gamebox.style.gridTemplateRows= "repeat("+num_cols_max+",1fr)";
+    // let gameboxclone = document.getElementById("gamebox_clone");
+    // clone_gamebox(gameboxclone, squares);
+    gamebox.style.gridTemplateColumns = "repeat(" + num_cols_max + ",1fr)";
+    gamebox.style.gridTemplateRows = "repeat(" + num_cols_max + ",1fr)";
+    // gameboxclone.style.gridTemplateColumns = "repeat(" + num_cols_max + ",1fr)";
+    // gameboxclone.style.gridTemplateRows = "repeat(" + num_cols_max + ",1fr)";
 
 
 }
 
-document.addEventListener('DOMContentLoaded',load_game);
+document.addEventListener('DOMContentLoaded', load_game);
 
 // document.addEventListener('DOMContentLoaded', () => {
 //
